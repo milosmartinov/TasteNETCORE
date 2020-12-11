@@ -1,0 +1,99 @@
+@page
+@using Microsoft.AspNetCore.Mvc.Rendering
+@model Taste.Pages.Admin.MenuItem.Upsert
+
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+    <div class="container">
+        <div class="row px-2 mx-2 whiteBackground border">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (Model.MenuItem.MenuItem.Id != 0)
+            {
+                <input type="hidden" asp-for="MenuItem.MenuItem.Id">
+            }
+            <div class="col-12 px-3" style="border-bottom: 1px solid black;">
+                <h2 class="text-primary">Menu item</h2>
+            </div>
+            <div class="col-8 pt-3">
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="MenuItem.MenuItem.Name"></label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" asp-for="MenuItem.MenuItem.Name">
+                        <span class="text-danger" asp-validation-for="MenuItem.MenuItem.Name"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="MenuItem.MenuItem.Price"></label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" asp-for="MenuItem.MenuItem.Price">
+                        <span class="text-danger" asp-validation-for="MenuItem.MenuItem.Price"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="MenuItem.MenuItem.Description"></label>
+                    </div>
+                    <div class="col-9">
+                        <textarea class="form-control" asp-for="MenuItem.MenuItem.Description"></textarea>
+                        <span class="text-danger" asp-validation-for="MenuItem.MenuItem.Price"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="MenuItem.MenuItem.Image"></label>
+                    </div>
+                    <div class="col-9">
+                        <input type="file" name="files" class="form-control">
+                        <span class="text-danger" asp-validation-for="MenuItem.MenuItem.Price"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="MenuItem.MenuItem.CategoryId"></label>
+                    </div>
+                    <div class="col-9">
+                        @Html.DropDownListFor(u => u.MenuItem.MenuItem.CategoryId, Model.MenuItem.Category, "Select category", new {@class = "form-control"})
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="MenuItem.MenuItem.FoodTypeId"></label>
+                    </div>
+                    <div class="col-9">
+                        @Html.DropDownListFor(u => u.MenuItem.MenuItem.FoodTypeId, Model.MenuItem.FoodType, "Select food type", new {@class = "form-control"})
+                    </div>
+                </div>
+                <div class="row offset-3 pb-3">
+                    <div class="col-2">
+                        @if (Model.MenuItem.MenuItem.Id == 0)
+                        {
+                            <button class="btn btn-success" type="submit">Create</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-success" type="submit">Update</button>
+                        }
+                    </div>
+                    <div class="col-2">
+                        <a class="btn btn-danger" asp-page="Index">Dismiss</a>
+                    </div>
+                </div>
+                @if (Model.MenuItem.MenuItem.Id != 0)
+                {
+                    <div class="col-4"><img src="@Model.MenuItem.MenuItem.Image"></div>
+                }
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts
+{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

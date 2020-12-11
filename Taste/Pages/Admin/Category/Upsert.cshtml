@@ -1,0 +1,58 @@
+@page
+@model Taste.Pages.Admin.Category.Upsert
+
+<form method="post" asp-action="Upsert">
+    <div class="container">
+        <div class="row px-2 mx-2 whiteBackground border">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (Model.categoryObj.Id != 0)
+            {
+                <input type="hidden" asp-for="categoryObj.Id">
+            }
+            <div class="col-12 px-3" style="border-bottom: 1px solid black;">
+                <h2 class="text-primary">Category</h2>
+            </div>
+            <div class="col-8 pt-3">
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="categoryObj.Name"></label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" asp-for="categoryObj.Name">
+                        <span class="text-danger" asp-validation-for="categoryObj.Name"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="categoryObj.DisplayOrder"></label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" asp-for="categoryObj.DisplayOrder">
+                        <span class="text-danger" asp-validation-for="categoryObj.DisplayOrder"></span>
+                    </div>
+                </div>
+                <div class="row offset-3 pb-3">
+                    <div class="col-2">
+                        @if (Model.categoryObj.Id == 0)
+                        {
+                            <button class="btn btn-success" type="submit">Create</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-success" type="submit">Update</button>
+                        }
+                    </div>
+                    <div class="col-2">
+                        <a class="btn btn-danger" asp-page="Index">Dismiss</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts
+{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
